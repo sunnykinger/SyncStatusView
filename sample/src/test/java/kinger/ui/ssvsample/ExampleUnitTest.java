@@ -1,4 +1,4 @@
-package kinger.view.syncstatusview;
+package kinger.ui.ssvsample;
 
 import org.junit.Test;
 

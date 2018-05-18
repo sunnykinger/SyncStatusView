@@ -1,4 +1,4 @@
-package kinger.view.syncstatusview;
+package kinger.ui;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import kinger.ui.syncstatusview.R;
 
 
 /**

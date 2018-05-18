@@ -1,4 +1,4 @@
-package kinger.view.syncstatusview;
+package kinger.ui.ssvsample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("kinger.view.syncstatusview.test", appContext.getPackageName());
+        assertEquals("kinger.view.syncstatusview", appContext.getPackageName());
     }
 }
