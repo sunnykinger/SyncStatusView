@@ -8,9 +8,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        app:not_synced_msg="Not Synced"
-        app:sync_status="not_synced"
-        app:synced_msg="Synced"
-        app:syncing_msg="Syncing" />
+        app:ssv_not_synced_msg="Not Synced"
+        app:ssv_sync_status="not_synced"
+        app:ssv_synced_msg="Synced"
+        app:ssv_syncing_msg="Syncing" />
 
 </RelativeLayout>

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SyncStatusView">
-        <attr name="sync_status">
+        <attr name="ssv_sync_status">
             <enum name="not_synced" value="-1" />
             <enum name="synced" value="0" />
         </attr>
-        <attr name="loading" format="boolean" />
-        <attr name="synced_msg" format="string" />
-        <attr name="not_synced_msg" format="string" />
-        <attr name="syncing_msg" format="string" />
-        <attr name="synced_text_color" format="color" />
-        <attr name="not_synced_text_color" format="color" />
-        <attr name="syncing_text_color" format="color" />
-        <attr name="synced_color" format="color" />
-        <attr name="not_synced_color" format="color" />
-        <attr name="syncing_color" format="color" />
+        <attr name="ssv_loading" format="boolean" />
+        <attr name="ssv_synced_msg" format="string" />
+        <attr name="ssv_not_synced_msg" format="string" />
+        <attr name="ssv_syncing_msg" format="string" />
+        <attr name="ssv_synced_text_color" format="color" />
+        <attr name="ssv_not_synced_text_color" format="color" />
+        <attr name="ssv_syncing_text_color" format="color" />
+        <attr name="ssv_synced_color" format="color" />
+        <attr name="ssv_not_synced_color" format="color" />
+        <attr name="ssv_syncing_color" format="color" />
+        <attr name="ssv_text_size" format="dimension" />
+        <attr name="ssv_icon_size" format="dimension" />
     </declare-styleable>
 
 </resources>

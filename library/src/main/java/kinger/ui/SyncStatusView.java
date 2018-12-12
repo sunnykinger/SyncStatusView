@@ -11,6 +11,7 @@ import android.os.SystemClock;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -40,6 +41,7 @@ public class SyncStatusView extends RelativeLayout {
     int mSyncingColor;
     int mNotSyncedColor;
     int mSyncedColor;
+    int mTextSize;
 
     public SyncStatusView(Context context) {
         super(context);
@@ -62,6 +64,18 @@ public class SyncStatusView extends RelativeLayout {
         init(attrs);
     }
 
+    public static int dpToPx(float dp, Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
+    }
+
+    public static int dpToSp(float dp, Context context) {
+        return (int) (dpToPx(dp, context) / context.getResources().getDisplayMetrics().scaledDensity);
+    }
+
+    public static int spToPx(float sp, Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, context.getResources().getDisplayMetrics());
+    }
+
     private void init(AttributeSet attrs) {
         int status;
         boolean loading;
@@ -71,17 +85,21 @@ public class SyncStatusView extends RelativeLayout {
         setAnimatorForBounce();
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.SyncStatusView);
         try {
-            mNotSyncedMsg = array.getString(R.styleable.SyncStatusView_not_synced_msg);
-            mSyncedMsg = array.getString(R.styleable.SyncStatusView_synced_msg);
-            mSyncingMsg = array.getString(R.styleable.SyncStatusView_syncing_msg);
-            mNotSyncedTextColor = array.getColor(R.styleable.SyncStatusView_not_synced_text_color, getResources().getColor(R.color.default_not_synced));
-            mSyncedTextColor = array.getColor(R.styleable.SyncStatusView_synced_text_color, getResources().getColor(R.color.default_synced));
-            mSyncingTextColor = array.getColor(R.styleable.SyncStatusView_syncing_text_color, getResources().getColor(R.color.default_syncing));
-            mNotSyncedColor = array.getColor(R.styleable.SyncStatusView_not_synced_color, getResources().getColor(android.R.color.black));
-            mSyncedColor = array.getColor(R.styleable.SyncStatusView_synced_color, getResources().getColor(android.R.color.black));
-            mSyncingColor = array.getColor(R.styleable.SyncStatusView_syncing_color, getResources().getColor(android.R.color.black));
-            status = array.getInt(R.styleable.SyncStatusView_sync_status, -1);
-            loading = array.getBoolean(R.styleable.SyncStatusView_loading, false);
+            mNotSyncedMsg = array.getString(R.styleable.SyncStatusView_ssv_not_synced_msg);
+            mSyncedMsg = array.getString(R.styleable.SyncStatusView_ssv_synced_msg);
+            mSyncingMsg = array.getString(R.styleable.SyncStatusView_ssv_syncing_msg);
+            mNotSyncedTextColor = array.getColor(R.styleable.SyncStatusView_ssv_not_synced_text_color, getResources().getColor(R.color.default_not_synced));
+            mSyncedTextColor = array.getColor(R.styleable.SyncStatusView_ssv_synced_text_color, getResources().getColor(R.color.default_synced));
+            mSyncingTextColor = array.getColor(R.styleable.SyncStatusView_ssv_syncing_text_color, getResources().getColor(R.color.default_syncing));
+            mNotSyncedColor = array.getColor(R.styleable.SyncStatusView_ssv_not_synced_color, getResources().getColor(android.R.color.black));
+            mSyncedColor = array.getColor(R.styleable.SyncStatusView_ssv_synced_color, getResources().getColor(android.R.color.black));
+            mSyncingColor = array.getColor(R.styleable.SyncStatusView_ssv_syncing_color, getResources().getColor(android.R.color.black));
+            status = array.getInt(R.styleable.SyncStatusView_ssv_sync_status, -1);
+            loading = array.getBoolean(R.styleable.SyncStatusView_ssv_loading, false);
+            mTextSize = array.getDimensionPixelSize(R.styleable.SyncStatusView_ssv_text_size, dpToPx(12f, getContext()));
+            int imgSize = array.getDimensionPixelSize(R.styleable.SyncStatusView_ssv_icon_size, dpToPx(18f, getContext()));
+            ivSync.getLayoutParams().width = imgSize;
+            ivSync.getLayoutParams().height = imgSize;
         } finally {
             array.recycle();
         }
@@ -177,6 +195,7 @@ public class SyncStatusView extends RelativeLayout {
     }
 
     public void setStatus(@Status int status) {
+        tvSyncStatus.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
         if (status == Status.NOT_SYNCED) {
             ivSync.post(new Runnable() {
                 @Override
